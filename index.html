@@ -7,6 +7,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
@@ -16,88 +17,115 @@
 
 <div class="container">
 
-  <header class="hero">
+  <header class="header">
     <div class="flower">🌸</div>
     <h1>Dear Suji</h1>
-    <p>Hi my puppy 🤍 How is your little heart feeling today?</p>
   </header>
 
   <nav class="tabs">
-    <button id="journalBtn" class="active">Journal</button>
-    <button id="dashboardBtn">Dashboard</button>
+    <button id="journalBtn" class="tab active" type="button">
+      Journal
+    </button>
+
+    <button id="dashboardBtn" class="tab" type="button">
+      Dashboard
+    </button>
   </nav>
 
-  <main id="journalPage">      <div id="loveNote" class="love-note"></div>
-
-    </section>
+  <!-- JOURNAL -->
+  <main id="journalPage">
 
     <section class="card streak-card">
       <div class="streak">
-        <span>🐾</span>
-        <strong id="streakCount">0</strong>
-        <span>Day Streak</span>
+        🐾 <span id="streakCount">0</span> Day Streak
       </div>
     </section>
 
-    <section class="card form-card">
+    <section class="card">
 
-      <label>How are you feeling today?</label>
+      <label>How is your little heart feeling today?</label>
 
       <div class="mood-grid">
-        <button class="mood-btn" data-mood="low">
-          🌧️
+
+        <button class="mood-btn" data-mood="low" type="button">
+          <span class="emoji">🌧️</span>
           <span>Rainy Cat</span>
         </button>
 
-        <button class="mood-btn" data-mood="okay">
-          ☁️
+        <button class="mood-btn" data-mood="okay" type="button">
+          <span class="emoji">☁️</span>
           <span>Sleepy Puppy</span>
         </button>
 
-        <button class="mood-btn" data-mood="better">
-          🌤️
+        <button class="mood-btn" data-mood="better" type="button">
+          <span class="emoji">🌤️</span>
           <span>Zoomies Puppy</span>
         </button>
+
       </div>
 
       <label>What do you need most?</label>
 
-      <select id="need">
-        <option>Comfort</option>
-        <option>Quiet company</option>
-        <option>Someone to listen</option>
-        <option>Distraction</option>
-        <option>Space</option>
+      <select id="need" required>
+        <option value="" selected disabled>Select one...</option>
+        <option value="Comfort">Comfort</option>
+        <option value="Quiet company">Quiet company</option>
+        <option value="Someone to listen">Someone to listen</option>
+        <option value="Distraction">Distraction</option>
+        <option value="Space">Space</option>
       </select>
 
-      <label>Tiny wins today</label>
+      <label>Today's Tiny Wins ✨</label>
 
       <div class="check-grid">
-        <label><input type="checkbox" value="Meds"> 💊 Medication </label>
 
-        <label><input type="checkbox" value="Water">💧 Water</label>
+        <label class="check-item">
+          <input type="checkbox" value="Water">
+          <span>💧 Drank water</span>
+        </label>
 
-        <label><input type="checkbox" value="Food">🍖 Food</label>
+        <label class="check-item">
+          <input type="checkbox" value="Food">
+          <span>🍖 Ate properly</span>
+        </label>
 
-        <label><input type="checkbox" value="Shower">🚿 Shower</label>
+        <label class="check-item">
+          <input type="checkbox" value="Shower">
+          <span>🚿 Showered</span>
+        </label>
 
-        <label><input type="checkbox" value="Outside">🌳 Outside</label>
+        <label class="check-item">
+          <input type="checkbox" value="Outside">
+          <span>🌳 Went outside</span>
+        </label>
 
-        <label><input type="checkbox" value="Social">🐾 Social</label>
+        <label class="check-item">
+          <input type="checkbox" value="Social">
+          <span>🐾 Spoke to someone</span>
+        </label>
 
       </div>
 
-      <label>What felt heaviest today?</label>
-      <textarea id="hard"></textarea>
+      <label class="check-item medication">
+        <input id="meds" type="checkbox">
+        <span>💊 Took my medication</span>
+      </label>
 
-      <label>One thing you're proud you survived</label>
-      <textarea id="proud"></textarea>
+      <label>What felt hardest today?</label>
 
-      <label>How connected did you feel to me today?</label>
+      <textarea
+        id="hard"
+        placeholder="You can write as much or as little as you'd like..."
+      ></textarea>
 
-      <div id="heartMeter" class="heart-meter"></div>
+      <label>One thing you're proud you survived 🌸</label>
 
-      <button id="submitBtn" class="submit">
+      <textarea
+        id="proud"
+        placeholder="Even the smallest thing counts."
+      ></textarea>
+
+      <button id="submitBtn" class="primary" type="button">
         Send Paw Report 🐶
       </button>
 
@@ -105,32 +133,70 @@
 
   </main>
 
+  <!-- DASHBOARD -->
   <main id="dashboardPage" class="hidden">
 
-    <section class="card">
+    <section class="card dashboard-card">
+
       <h2>📈 Mood Trend</h2>
+
       <canvas id="moodChart"></canvas>
+
+      <p class="caption">
+        Your journey, one day at a time.
+      </p>
+
     </section>
 
-    <section class="card">
-      <h2>💊 Medication Adherence</h2>
-      <div id="medRate" class="big-stat">0%</div>
+    <section class="card dashboard-card">
+
+      <div class="stat-row">
+
+        <div>
+          <p class="small">Medication</p>
+          <h2 id="medRate">0%</h2>
+        </div>
+
+        <div class="pill">💊</div>
+
+      </div>
+
+      <div class="progress">
+        <div id="medBar" class="progress-fill"></div>
+      </div>
+
+      <p class="caption">
+        Based on completed daily check-ins.
+      </p>
+
     </section>
 
-    <section class="card">
-      <h2>📅 Monthly Mood Calendar</h2>
+    <section class="card dashboard-card">
+
+      <h2>📅 This Month</h2>
+
+      <div class="calendar-head">
+        <span>M</span><span>T</span><span>W</span>
+        <span>T</span><span>F</span><span>S</span><span>S</span>
+      </div>
+
       <div id="calendar" class="calendar"></div>
+
+      <p class="caption">
+        🌧️ Rainy · ☁️ Sleepy · 🌤️ Zoomies
+      </p>
+
     </section>
 
   </main>
 
-  <footer>
+  <footer class="footer">
     Made with endless love for my puppy 🤍
   </footer>
 
 </div>
 
-<script type="module" src="firebase.js"></script>
 <script type="module" src="app.js"></script>
+
 </body>
 </html>
