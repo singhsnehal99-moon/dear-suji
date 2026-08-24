@@ -3,26 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dear Suji 🌸</title>
+  <title>Dear Suji</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="container">
 
-  <!-- Header -->
   <header class="header">
     <div class="flower">🌸</div>
     <h1>Dear Suji</h1>
-    <p class="subtitle">Your little sanctuary.</p>
   </header>
 
-  <!-- Tabs -->
   <nav class="tabs">
     <button id="journalBtn" class="tab active" type="button">
       Journal
@@ -50,30 +49,24 @@
 
         <button class="mood-btn" data-mood="low" type="button">
           <span class="emoji">🌧️</span>
-          <div>
-            <small>Today feels heavy</small>
-          </div>
+          <span>Rainy Cat</span>
         </button>
 
         <button class="mood-btn" data-mood="okay" type="button">
           <span class="emoji">☁️</span>
-          <div>
-            <small>I'm getting through today</small>
-          </div>
+          <span>Sleepy Puppy</span>
         </button>
 
         <button class="mood-btn" data-mood="better" type="button">
           <span class="emoji">🌤️</span>
-          <div>
-            <small>Today feels a little lighter</small>
-          </div>
+          <span>Zoomies Puppy</span>
         </button>
 
       </div>
 
       <label>What do you need most?</label>
 
-      <select id="need">
+      <select id="need" required>
         <option value="" selected disabled>Select one...</option>
         <option value="Comfort">Comfort</option>
         <option value="Quiet company">Quiet company</option>
@@ -93,7 +86,7 @@
 
         <label class="check-item">
           <input type="checkbox" value="Food">
-          <span>🍖 Ate properly</span>
+          <span>🍖 Ate 2 meals</span>
         </label>
 
         <label class="check-item">
@@ -105,16 +98,11 @@
           <input type="checkbox" value="Outside">
           <span>🌳 Went outside</span>
         </label>
-
-        <label class="check-item">
-          <input type="checkbox" value="Social">
-          <span>🐾 Spoke to someone</span>
-        </label>
         
-      <label class="check-item medication">
+        <label class="check-item medication">
         <input id="meds" type="checkbox">
         <span>💊 Took my medication</span>
-      </label>
+        </label>
       </div>
 
       <label>What felt hardest today?</label>
@@ -142,52 +130,54 @@
   <!-- DASHBOARD -->
   <main id="dashboardPage" class="hidden">
 
-    <section class="card">
+    <section class="card dashboard-card">
 
-      <div class="dashboard-title">
-        <h2>📈 Mood Trend</h2>
-        <p>Your journey, one day at a time.</p>
-      </div>
+      <h2>📈 Mood Trend</h2>
 
       <canvas id="moodChart"></canvas>
 
+      <p class="caption">
+        Your journey, one day at a time.
+      </p>
+
     </section>
 
-    <section class="card">
+    <section class="card dashboard-card">
 
-      <div class="dashboard-title">
-        <h2>💊 Medication</h2>
-        <h1 id="medRate">0%</h1>
+      <div class="stat-row">
+
+        <div>
+          <p class="small">Medication</p>
+          <h2 id="medRate">0%</h2>
+        </div>
+
+        <div class="pill">💊</div>
+
       </div>
 
       <div class="progress">
         <div id="medBar" class="progress-fill"></div>
       </div>
 
-      <p class="caption">Based on completed check-ins.</p>
+      <p class="caption">
+        Based on completed daily check-ins.
+      </p>
 
     </section>
 
-    <section class="card">
+    <section class="card dashboard-card">
 
-      <div class="dashboard-title">
-        <h2>📅 This Month</h2>
-      </div>
+      <h2>📅 This Month</h2>
 
       <div class="calendar-head">
-        <span>M</span>
-        <span>T</span>
-        <span>W</span>
-        <span>T</span>
-        <span>F</span>
-        <span>S</span>
-        <span>S</span>
+        <span>M</span><span>T</span><span>W</span>
+        <span>T</span><span>F</span><span>S</span><span>S</span>
       </div>
 
       <div id="calendar" class="calendar"></div>
 
       <p class="caption">
-        🌧️ Rainy • ☁️ Sleepy • 🌤️ Zoomies
+        🌧️ · ☁️ · 🌤️ 
       </p>
 
     </section>
@@ -200,5 +190,7 @@
 
 </div>
 
-<!-- JavaScript -->
-<script type="module" src="app.js"></scrip
+<script type="module" src="app.js"></script>
+
+</body>
+</html>
