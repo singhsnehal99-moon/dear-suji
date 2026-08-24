@@ -151,7 +151,7 @@ document.getElementById("submitBtn").onclick=async()=>{
     better:"🌤️ Zoomies Puppy"
   };
 
-  const message = `
+  const message = '
 🐾 **Dear Suji**
 
 🌤 Mood: ${entry.mood}
