@@ -2,7 +2,9 @@ name: Dear Suji Reminder
 
 on:
   schedule:
-    - cron: "30 14 * * *"   # 8PM IST
+    - cron: "0 12 * * *"  # 8:00 PM Malaysia (MYT)
+  workflow_dispatch:
+
 
 jobs:
   remind:
