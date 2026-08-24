@@ -180,8 +180,5 @@ I love you endlessly 🤍`;
       content:message
     })
   });
-
-  alert("Paw report sent 🐶");
-
-  location.reload();
+window.location.href = "thankyou.html";
 };
