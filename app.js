@@ -39,13 +39,16 @@ dashboardBtn.onclick=()=>{
 
 /* ---------- Mood ---------- */
 
-document.querySelectorAll(".mood-btn").forEach(btn=>{
-  btn.onclick=()=>{
+document.querySelectorAll(".mood-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+
     document.querySelectorAll(".mood-btn")
-      .forEach(b=>b.classList.remove("active"));
-    btn.classList.add("active");
-    mood=btn.dataset.mood;
-  };
+      .forEach(b => b.classList.remove("selected"));
+
+    btn.classList.add("selected");
+    mood = btn.dataset.mood;
+
+  });
 });
 
 /* ---------- Load ---------- */
