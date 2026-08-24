@@ -54,6 +54,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+if (!mood) {
+  alert("Choose how you're feeling first 💕");
+  return;
+}
   const loveNotes = [
     "You never have to earn my love. 🤍",
     "Even on rainy-cat days, you're still my favourite person.",
@@ -209,7 +213,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const entry={
 
-      name:"Suji",
       mood,
       need:need.value,
       meds:meds.checked,
