@@ -171,7 +171,7 @@ ${entry.proud||"-"}
 
 I love you endlessly 🤍`;
 
-  await fetch("YOUR_DISCORD_WEBHOOK",{
+  await fetch("https://discord.com/api/webhooks/1541403765377335368/CN4gZW2CzGd-Zdn-6eKrmL219FLwMY8VHuhDhkdgK7KZ-_W216KF7FDU9BDdbZLOnmbR",{
     method:"POST",
     headers:{
       "Content-Type":"application/json"
