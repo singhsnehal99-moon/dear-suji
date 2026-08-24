@@ -108,8 +108,8 @@ textarea{
   font-size:15px;
 }
 
-.mood-btn.selected{
-  background:#F9A8D4 !important;
+.mood-btn.active{
+  background:#F9A8D4;
   color:#831843;
 }
 
