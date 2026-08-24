@@ -7,257 +7,263 @@ import {
   orderBy
 } from "./firebase.js";
 
-const pets = {
-  low: {
-    emoji: "🐱",
-    title: "Rainy Cat",
-    text: "A little kitten curled beside your journal today."
-  },
-  okay: {
-    emoji: "🐶",
-    title: "Sleepy Puppy",
-    text: "You're my sleepy little puppy. Let's take today one tiny step at a time."
-  },
-  better: {
-    emoji: "🐕",
-    title: "Zoomies Puppy",
-    text: "MY PUPPY HAS THE ZOOMIES!! I'm celebrating every little win with you."
-  }
-};
+document.addEventListener("DOMContentLoaded", () => {
 
-const loveNotes = [
-  "You never have to earn my love. 🤍",
-  "Even on rainy-cat days, you're still my favourite person.",
-  "I'm endlessly proud of you for staying.",
-  "Borrow my belief in you until yours comes back.",
-  "You make my world softer just by existing. 🐶"
-];
+  const journalPage = document.getElementById("journalPage");
+  const dashboardPage = document.getElementById("dashboardPage");
 
-let mood = "low";
-let hearts = 0;
-let entries = [];
+  const journalBtn = document.getElementById("journalBtn");
+  const dashboardBtn = document.getElementById("dashboardBtn");
 
-loveNote.innerText =
-  loveNotes[Math.floor(Math.random()*loveNotes.length)];
+  const petEmoji = document.getElementById("petEmoji");
+  const petTitle = document.getElementById("petTitle");
+  const petMessage = document.getElementById("petMessage");
+  const loveNote = document.getElementById("loveNote");
 
-document.querySelectorAll(".mood-btn").forEach(btn=>{
-  btn.onclick=()=>{
-    document.querySelectorAll(".mood-btn")
-      .forEach(b=>b.classList.remove("active"));
+  const streakCount = document.getElementById("streakCount");
+  const calendar = document.getElementById("calendar");
+  const medRate = document.getElementById("medRate");
 
-    btn.classList.add("active");
+  const heartMeter = document.getElementById("heartMeter");
+  const submitBtn = document.getElementById("submitBtn");
 
-    mood=btn.dataset.mood;
+  const need = document.getElementById("need");
+  const meds = document.getElementById("meds");
+  const hard = document.getElementById("hard");
+  const proud = document.getElementById("proud");
 
-    petEmoji.innerText=pets[mood].emoji;
-    petTitle.innerText=pets[mood].title;
-    petMessage.innerText=pets[mood].text;
-  }
-})
+  let mood = "";
+  let hearts = 0;
+  let entries = [];
 
-for(let i=1;i<=5;i++){
-
-  const h=document.createElement("span");
-
-  h.innerText="🤍";
-
-  h.onclick=()=>{
-    hearts=i;
-
-    [...heartMeter.children].forEach((c,index)=>{
-      c.innerText=index<i?"❤️":"🤍";
-    })
-  }
-
-  heartMeter.appendChild(h);
-}
-
-async function loadEntries(){
-
-  const q=query(
-    collection(db,"checkins"),
-    orderBy("date")
-  );
-
-  const snap=await getDocs(q);
-
-  entries=[];
-
-  snap.forEach(doc=>{
-    entries.push(doc.data());
-  })
-
-  updateDashboard();
-  hiddenFeature();
-}
-
-loadEntries();
-
-function calculateStreak(){
-
-  if(entries.length===0) return 0;
-
-  let streak=1;
-
-  const sorted=[...entries]
-    .sort((a,b)=>new Date(a.date)-new Date(b.date));
-
-  for(let i=sorted.length-1;i>0;i--){
-
-    const diff=
-      (new Date(sorted[i])-new Date(sorted[i-1]))
-      /(1000*60*60*24);
-
-    if(diff<=1.5) streak++;
-    else break;
-
-  }
-
-  return streak;
-
-}
-
-function hiddenFeature(){
-
-  const last3=
-    entries.slice(-3);
-
-  if(last3.length<3) return;
-
-  const allRain=
-    last3.every(x=>x.mood==="low");
-
-  if(allRain){
-
-    loveNote.innerHTML=
-    "Hi my puppy 🤍<br><br>I know it's been a few really heavy days.<br><br>You don't have to be brave with me today. Thank you for staying. I'm so proud of you, and I love you endlessly.";
-
-    petEmoji.innerText="😿";
-    petTitle.innerText="Your puppy is sitting beside you today";
-    petMessage.innerText="No expectations. Just rest.";
-  }
-
-}
-
-submitBtn.onclick=async()=>{
-
-  const wins=
-    [...document.querySelectorAll(".check-grid input:checked")]
-      .map(x=>x.value);
-
-  const entry={
-    name:name.value||"Suji",
-    mood,
-    need:need.value,
-    meds:meds.checked,
-    wins,
-    hard:hard.value,
-    proud:proud.value,
-    hearts,
-    date:new Date().toISOString()
+  const pets = {
+    low: {
+      emoji: "🐱",
+      title: "Rainy Cat",
+      text: "A little kitten curled beside your journal today."
+    },
+    okay: {
+      emoji: "🐶",
+      title: "Sleepy Puppy",
+      text: "Let's take today one tiny step at a time."
+    },
+    better: {
+      emoji: "🐕",
+      title: "Zoomies Puppy",
+      text: "MY PUPPY HAS THE ZOOMIES!!"
+    }
   };
 
-  await addDoc(collection(db,"checkins"),entry);
+  const loveNotes = [
+    "You never have to earn my love. 🤍",
+    "Even on rainy-cat days, you're still my favourite person.",
+    "I'm endlessly proud of you for staying.",
+    "Borrow my belief in you until yours comes back.",
+    "You make my world softer just by existing."
+  ];
 
-  const discordMessage=`
+  petEmoji.textContent = "🐾";
+  petTitle.textContent = "Hi my puppy 🤍";
+  petMessage.textContent = "Tell me how your little heart is feeling today.";
+  loveNote.textContent = loveNotes[Math.floor(Math.random()*loveNotes.length)];
+
+  // Mood buttons
+  document.querySelectorAll(".mood-btn").forEach(btn => {
+
+    btn.addEventListener("click", () => {
+
+      document.querySelectorAll(".mood-btn")
+        .forEach(b => b.classList.remove("active"));
+
+      btn.classList.add("active");
+
+      mood = btn.dataset.mood;
+
+      petEmoji.textContent = pets[mood].emoji;
+      petTitle.textContent = pets[mood].title;
+      petMessage.textContent = pets[mood].text;
+
+    });
+
+  });
+
+  // Hearts
+  for(let i=1;i<=5;i++){
+
+    const span=document.createElement("span");
+    span.textContent="🤍";
+
+    span.onclick=()=>{
+
+      hearts=i;
+
+      [...heartMeter.children].forEach((h,index)=>{
+        h.textContent=index<i?"❤️":"🤍";
+      });
+
+    }
+
+    heartMeter.appendChild(span);
+
+  }
+
+  // Tabs
+  journalBtn.onclick=()=>{
+
+    journalPage.classList.remove("hidden");
+    dashboardPage.classList.add("hidden");
+
+    journalBtn.classList.add("active");
+    dashboardBtn.classList.remove("active");
+
+  }
+
+  dashboardBtn.onclick=()=>{
+
+    dashboardPage.classList.remove("hidden");
+    journalPage.classList.add("hidden");
+
+    dashboardBtn.classList.add("active");
+    journalBtn.classList.remove("active");
+
+  }
+
+  async function loadEntries(){
+
+    const q=query(
+      collection(db,"checkins"),
+      orderBy("date")
+    );
+
+    const snap=await getDocs(q);
+
+    entries=[];
+
+    snap.forEach(doc=>entries.push(doc.data()));
+
+    updateDashboard();
+    hiddenFeature();
+
+  }
+
+  function hiddenFeature(){
+
+    const last3=entries.slice(-3);
+
+    if(last3.length===3 &&
+       last3.every(x=>x.mood==="low")){
+
+      loveNote.innerHTML=`
+      Hi my puppy 🤍<br><br>
+      I know it's been a few really heavy days.<br><br>
+      You don't have to be brave with me today.
+      I'm so proud of you and I love you endlessly.
+      `;
+
+    }
+
+  }
+
+  function updateDashboard(){
+
+    streakCount.textContent=entries.length;
+
+    const medsTaken=entries.filter(x=>x.meds).length;
+
+    medRate.textContent=
+      entries.length?
+      Math.round(medsTaken/entries.length*100)+"%":"0%";
+
+    calendar.innerHTML="";
+
+    for(let i=1;i<=35;i++){
+
+      const day=document.createElement("div");
+      day.className="day";
+
+      const entry=entries.find(
+        x=>new Date(x.date).getDate()===i
+      );
+
+      day.textContent=
+        entry?
+        (entry.mood==="low"?"🌧️":
+        entry.mood==="okay"?"☁️":"🌤️"):
+        i;
+
+      calendar.appendChild(day);
+
+    }
+
+  }
+
+  submitBtn.onclick=async()=>{
+
+    if(!mood){
+      alert("Choose how you're feeling first 🤍");
+      return;
+    }
+
+    const wins=[...document.querySelectorAll(".check-grid input:checked")]
+      .map(x=>x.value);
+
+    const entry={
+
+      name:"Suji",
+      mood,
+      need:need.value,
+      meds:meds.checked,
+      wins,
+      hard:hard.value,
+      proud:proud.value,
+      hearts,
+      date:new Date().toISOString()
+
+    };
+
+    await addDoc(collection(db,"checkins"),entry);
+
+    const discordMessage=`
 🐾 **Dear Suji**
-
-**${entry.name} checked in today 💜**
 
 🌤 Mood: ${pets[mood].title}
 
-🤍 Needs: ${entry.need}
+🤍 Need: ${entry.need}
 
-💊 Medication: ${entry.meds?"✅ Yes":"❌ No"}
+💊 Medication: ${entry.meds?"Yes":"No"}
 
 ❤️ Connection: ${"❤️".repeat(entry.hearts)}
 
-**Tiny wins**
+Tiny Wins:
 ${wins.join(", ")||"None"}
 
-**Hardest**
+Hardest:
 ${entry.hard||"-"}
 
-**Proud**
+Proud:
 ${entry.proud||"-"}
 
-━━━━━━━━━━━━━━
+━━━━━━━━━━
 
-I love you endlessly.
-
-You never have to earn my love.
-
-I'm so proud of you for choosing another day. 🐶
+I love you endlessly. 🤍
 `;
 
-  await fetch("https://discord.com/api/webhooks/1541403765377335368/CN4gZW2CzGd-Zdn-6eKrmL219FLwMY8VHuhDhkdgK7KZ-_W216KF7FDU9BDdbZLOnmbR",{
-    method:"POST",
-    headers:{
-      "Content-Type":"application/json"
-    },
-    body:JSON.stringify({
-      content:discordMessage
-    })
-  });
+    await fetch("https://discord.com/api/webhooks/1541403765377335368/CN4gZW2CzGd-Zdn-6eKrmL219FLwMY8VHuhDhkdgK7KZ-_W216KF7FDU9BDdbZLOnmbR",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+        content:discordMessage
+      })
+    });
 
-  document.body.innerHTML=`
-  <div style="padding:50px;text-align:center">
-    <div style="font-size:100px">🐶</div>
-    <h1 style="color:#8B5CF6">
-      Thank you, my puppy.
-    </h1>
-    <p>I'm so proud of you for checking in today.</p>
-    <p>Go drink some water and wrap yourself in something cozy.</p>
-    <h2 style="color:#EC4899">
-      You are loved beyond measure. 🤍
-    </h2>
-  </div>`;
-}
+    alert("Your paw report was sent 🐶");
 
-function updateDashboard(){
-
-  streakCount.innerText=calculateStreak();
-
-  const meds=
-    entries.filter(x=>x.meds).length;
-
-  medRate.innerText=
-    entries.length?
-    Math.round(meds/entries.length*100)+"%":"0%";
-
-  drawCalendar();
-}
-
-function drawCalendar(){
-
-  calendar.innerHTML="";
-
-  for(let i=1;i<=35;i++){
-
-    const d=document.createElement("div");
-    d.className="day";
-
-    const e=
-      entries.find(x=>
-        new Date(x.date).getDate()===i
-      );
-
-    d.innerHTML=e?
-      (e.mood==="low"?"🌧️":e.mood==="okay"?"☁️":"🌤️"):
-      i;
-
-    calendar.appendChild(d);
+    loadEntries();
 
   }
 
-}
+  loadEntries();
 
-journalBtn.onclick=()=>{
-  journalPage.classList.remove("hidden");
-  dashboardPage.classList.add("hidden");
-}
-
-dashboardBtn.onclick=()=>{
-  dashboardPage.classList.remove("hidden");
-  journalPage.classList.add("hidden");
-}
+});
