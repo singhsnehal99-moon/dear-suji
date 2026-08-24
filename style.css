@@ -8,7 +8,7 @@
 }
 
 body{
-  background:linear-gradient(180deg,#FFF7F5,#F4F0FF);
+  background:linear-gradient(180deg,#FFF7F5,#F5F0FF);
   color:#4B4453;
 }
 
@@ -18,44 +18,38 @@ body{
   padding:22px;
 }
 
-.hero{
+.header{
   text-align:center;
-  margin-bottom:20px;
-}
-
-.hero h1{
-  color:#8B5CF6;
-  font-size:34px;
-}
-
-.hero p{
-  color:#7C6F8A;
-  margin-top:6px;
-  font-size:14px;
+  margin-bottom:18px;
 }
 
 .flower{
-  font-size:42px;
+  font-size:40px;
+}
+
+.header h1{
+  color:#8B5CF6;
+  font-size:34px;
 }
 
 .tabs{
   display:flex;
   gap:10px;
-  margin-bottom:18px;
+  margin-bottom:16px;
 }
 
-.tabs button{
+.tab{
   flex:1;
+  padding:12px;
   border:none;
   border-radius:14px;
-  padding:12px;
-  cursor:pointer;
-  background:#EEE7FF;
+  background:#ECE5FF;
   color:#6D28D9;
   font-weight:600;
+  cursor:pointer;
 }
 
-.tabs .active{
+.tab.active{
   background:#8B5CF6;
   color:white;
 }
@@ -65,47 +59,12 @@ body{
   border-radius:24px;
   padding:20px;
   margin-bottom:18px;
-  box-shadow:0 10px 28px rgba(0,0,0,.08);
-}
-
-.pet-card{
-  text-align:center;
-}
-
-.pet{
-  font-size:88px;
-  animation:float 3s ease-in-out infinite;
-}
-
-@keyframes float{
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-6px)}
-  100%{transform:translateY(0)}
-}
-
-.pet-card h2{
-  color:#6D28D9;
-  margin-top:8px;
-}
-
-.pet-card p{
-  color:#666;
-  margin-top:8px;
-}
-
-.love-note{
-  margin-top:14px;
-  background:#FFF0F7;
-  padding:14px;
-  border-radius:16px;
-  color:#C026D3;
-  font-style:italic;
+  box-shadow:0 8px 24px rgba(0,0,0,.08);
 }
 
 .streak{
   display:flex;
   justify-content:center;
-  align-items:center;
   gap:8px;
   font-size:20px;
   color:#D97706;
@@ -117,11 +76,11 @@ label{
   font-weight:600;
 }
 
-input,select,textarea{
+select,textarea{
   width:100%;
   border:none;
-  background:#F7F3FF;
   border-radius:16px;
+  background:#F7F3FF;
   padding:14px;
   font-size:14px;
 }
@@ -131,12 +90,6 @@ textarea{
   resize:none;
 }
 
-.checkbox-row{
-  display:flex;
-  gap:10px;
-  align-items:center;
-}
-
 .mood-grid{
   display:grid;
   gap:10px;
@@ -144,83 +97,132 @@ textarea{
 
 .mood-btn{
   border:none;
-  background:#FFE5EE;
   border-radius:16px;
   padding:14px;
-  cursor:pointer;
+  background:#FFE5EF;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  gap:12px;
+  cursor:pointer;
+  transition:.2s;
+  font-size:15px;
 }
 
 .mood-btn.active{
-  background:#FFD0E2;
-  outline:2px solid #EC4899;
+  background:#F9A8D4;
+  color:#831843;
+}
+
+.emoji{
+  font-size:22px;
 }
 
 .check-grid{
-  display:grid;
-  gap:8px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
 }
 
-.check-grid label{
+.check-item{
   display:flex;
   align-items:center;
-  gap:10px;
-  margin:0;
-  font-weight:400;
+  gap:12px;
+  font-weight:500;
 }
 
-.heart-meter{
-  display:flex;
-  justify-content:center;
-  gap:8px;
-  font-size:34px;
-  cursor:pointer;
+.check-item input{
+  width:18px;
+  height:18px;
 }
 
-.submit{
+.medication{
+  margin-top:14px;
+  padding-top:14px;
+  border-top:1px solid #F3E8FF;
+}
+
+.primary{
   width:100%;
   border:none;
   background:#8B5CF6;
   color:white;
   padding:16px;
   border-radius:18px;
-  margin-top:22px;
-  cursor:pointer;
   font-size:16px;
   font-weight:600;
+  cursor:pointer;
+  margin-top:22px;
 }
 
 .hidden{
   display:none;
 }
 
-.big-stat{
-  font-size:42px;
-  color:#8B5CF6;
-  font-weight:700;
+.dashboard-card h2{
+  margin-bottom:14px;
 }
 
+canvas{
+  width:100%;
+  height:140px;
+  background:#FAF7FF;
+  border-radius:16px;
+}
+
+.progress{
+  height:10px;
+  background:#E9D5FF;
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.progress-fill{
+  width:0%;
+  height:100%;
+  background:#8B5CF6;
+}
+
+.stat-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px;
+}
+
+.pill{
+  font-size:34px;
+}
+
+.calendar-head,
 .calendar{
   display:grid;
   grid-template-columns:repeat(7,1fr);
   gap:6px;
+  text-align:center;
+}
+
+.calendar-head{
+  color:#9CA3AF;
+  margin-bottom:8px;
 }
 
 .day{
   background:#FAF7FF;
   border-radius:10px;
+  padding:10px 0;
   min-height:42px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:12px;
+  font-size:13px;
 }
 
-footer{
+.caption{
+  color:#8A8195;
+  font-size:12px;
+  margin-top:10px;
+}
+
+.footer{
   text-align:center;
   color:#8A8195;
-  padding:10px 0 20px;
   font-size:12px;
+  padding:12px;
 }
