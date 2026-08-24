@@ -1,0 +1,18 @@
+name: Dear Suji Reminder
+
+on:
+  schedule:
+    - cron: "30 14 * * *"   # 8PM IST
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send Discord reminder
+        run: |
+          curl -H "Content-Type: application/json" \
+          -d '{
+            "content":"🌙 Hi my puppy 🤍 Your little corner of the internet has been waiting for you. It only takes 2 minutes to check in. I love you endlessly🐶"
+          }' \
+          "${{ secrets.DISCORD_WEBHOOK }}"
