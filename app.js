@@ -151,34 +151,38 @@ document.getElementById("submitBtn").onclick=async()=>{
     better:"🌤️ Zoomies Puppy"
   };
 
-  const message=`🐾 **Dear Suji**
+  const message = `
+🐾 **Dear Suji**
 
-${moodText[mood]}
-
-Need: ${need}
-Medication: ${entry.meds?"✅ Yes":"❌ No"}
+🌤 Mood: ${entry.mood}
+🤍 Needs: ${entry.need}
+💊 Medication: ${entry.meds ? "Yes" : "No"}
 
 **Tiny Wins**
-${wins.join(", ")||"None"}
+${wins.join(", ") || "None"}
 
 **Hardest**
-${entry.hard||"-"}
+${entry.hard || "-"}
 
 **Proud**
-${entry.proud||"-"}
+${entry.proud || "-"}
 
 ━━━━━━━━━━━━
 
-I love you endlessly 🤍`;
+I love you endlessly. I'm so proud of you for choosing another day 🐶';
 
   await fetch("https://discord.com/api/webhooks/1541403765377335368/CN4gZW2CzGd-Zdn-6eKrmL219FLwMY8VHuhDhkdgK7KZ-_W216KF7FDU9BDdbZLOnmbR",{
     method:"POST",
-    headers:{
-      "Content-Type":"application/json"
-    },
-    body:JSON.stringify({
-      content:message
-    })
-  });
+  headers:{
+    "Content-Type":"application/json"
+  },
+  body:JSON.stringify({
+    content:message
+  })
+});
+
+  updateDashboard();
+
+// Go to the thank-you page
 window.location.href = "thankyou.html";
 };
