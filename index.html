@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dear Suji</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+  <header class="hero">
+    <div class="flower">🌸</div>
+    <h1>Dear Suji</h1>
+    <p>Hi my puppy 🤍 How is your little heart feeling today?</p>
+  </header>
+
+  <nav class="tabs">
+    <button id="journalBtn" class="active">Journal</button>
+    <button id="dashboardBtn">Dashboard</button>
+  </nav>
+
+  <main id="journalPage">
+
+    <section class="card pet-card">
+
+      <div id="petEmoji" class="pet">🐱</div>
+
+      <h2 id="petTitle">Rainy Cat</h2>
+
+      <p id="petMessage">
+        A little kitten curled beside your journal today.
+      </p>
+
+      <div id="loveNote" class="love-note"></div>
+
+    </section>
+
+    <section class="card streak-card">
+      <div class="streak">
+        <span>🐾</span>
+        <strong id="streakCount">0</strong>
+        <span>Day Streak</span>
+      </div>
+    </section>
+
+    <section class="card form-card">
+
+      <label>Your name</label>
+      <input id="name" type="text" placeholder="Suji">
+
+      <label>How are you feeling today?</label>
+
+      <div class="mood-grid">
+        <button class="mood-btn" data-mood="low">
+          🌧️
+          <span>Rainy Cat</span>
+        </button>
+
+        <button class="mood-btn" data-mood="okay">
+          ☁️
+          <span>Sleepy Puppy</span>
+        </button>
+
+        <button class="mood-btn" data-mood="better">
+          🌤️
+          <span>Zoomies Puppy</span>
+        </button>
+      </div>
+
+      <label>What do you need most?</label>
+
+      <select id="need">
+        <option>Comfort</option>
+        <option>Quiet company</option>
+        <option>Someone to listen</option>
+        <option>Distraction</option>
+        <option>Space</option>
+      </select>
+
+      <label class="checkbox-row">
+        <input id="meds" type="checkbox">
+        Took my medication 💊
+      </label>
+
+      <label>Tiny wins today</label>
+
+      <div class="check-grid">
+
+        <label><input type="checkbox" value="Water">💧 Water</label>
+
+        <label><input type="checkbox" value="Food">🍖 Food</label>
+
+        <label><input type="checkbox" value="Shower">🚿 Shower</label>
+
+        <label><input type="checkbox" value="Outside">🌳 Outside</label>
+
+        <label><input type="checkbox" value="Social">🐾 Social</label>
+
+      </div>
+
+      <label>What felt heaviest today?</label>
+      <textarea id="hard"></textarea>
+
+      <label>One thing you're proud you survived</label>
+      <textarea id="proud"></textarea>
+
+      <label>How connected did you feel to me today?</label>
+
+      <div id="heartMeter" class="heart-meter"></div>
+
+      <button id="submitBtn" class="submit">
+        Send Paw Report 🐶
+      </button>
+
+    </section>
+
+  </main>
+
+  <main id="dashboardPage" class="hidden">
+
+    <section class="card">
+      <h2>📈 Mood Trend</h2>
+      <canvas id="moodChart"></canvas>
+    </section>
+
+    <section class="card">
+      <h2>💊 Medication Adherence</h2>
+      <div id="medRate" class="big-stat">0%</div>
+    </section>
+
+    <section class="card">
+      <h2>📅 Monthly Mood Calendar</h2>
+      <div id="calendar" class="calendar"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    Made with endless love for my puppy 🤍
+  </footer>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
