@@ -1,14 +1,14 @@
 name: Dear Suji Reminder
 
 on:
-  schedule:
+  #schedule:
     - cron: "0 12 * * *"  # 8:00 PM Malaysia (MYT)
-  workflow_dispatch:
+  #workflow_dispatch:
 
 
 jobs:
   remind:
-    runs-on: ubuntu-latest
+    #runs-on: ubuntu-latest
 
     steps:
       - name: Send Discord reminder
